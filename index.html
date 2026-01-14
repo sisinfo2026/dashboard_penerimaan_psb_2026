@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard PSB PP. Dzunnuroin 2026/2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a5c3d;
+            --primary-light: #0d7a51;
+            --primary-dark: #083d29;
+            --secondary: #c49a3a;
+            --accent: #d4af37;
+            --bg-main: #f8f7f4;
+            --bg-card: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --shadow-sm: 0 2px 8px rgba(10, 92, 61, 0.08);
+            --shadow-md: 0 4px 16px rgba(10, 92, 61, 0.12);
+            --shadow-lg: 0 8px 32px rgba(10, 92, 61, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f8f7f4 0%, #e8e6e1 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section {
+            margin-bottom: 20px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.2em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .year {
+            font-size: 1.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .intro-text {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--secondary);
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-text p {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .intro-text strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .card:nth-child(1) {
+            animation: cardAppear 0.6s ease-out 0.3s both;
+        }
+
+        .card:nth-child(2) {
+            animation: cardAppear 0.6s ease-out 0.4s both;
+        }
+
+        .card:nth-child(3) {
+            animation: cardAppear 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(10, 92, 61, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .card-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: white;
+        }
+
+        .card-title {
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .card-subtitle {
+            font-size: 1.1em;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .card-description {
+            font-size: 1em;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(10, 92, 61, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10, 92, 61, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            margin-top: 40px;
+            animation: slideUp 0.8s ease-out 0.6s both;
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        footer strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .arabic-text {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+        }
+
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(45deg, var(--primary) 0px, var(--primary) 2px, transparent 2px, transparent 10px),
+                repeating-linear-gradient(-45deg, var(--primary) 0px, var(--primary) 2px, transparent 2px, transparent 10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="pattern-bg"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="arabic-text">معهد ذي النورين</div>
+                    <h1>Dashboard Penerimaan Santri Baru</h1>
+                    <p class="subtitle">PP. Dzunnuroin</p>
+                    <p class="year">Tahun Ajaran 2026/2027</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="intro-text">
+            <p>
+                Assalamu'alaikum Warahmatullahi Wabarakatuh,<br><br>
+                Selamat datang di <strong>Dashboard Penerimaan Santri Baru (PSB)</strong> Pondok Pesantren Dzunnuroin. 
+                Silakan pilih jenjang pendidikan yang sesuai untuk melanjutkan proses pendaftaran.
+            </p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Card Ula -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 3.64v8.92c0 4.37-2.97 8.45-8 9.72-5.03-1.27-8-5.35-8-9.72V7.82l8-3.64zM10 12H8v-2h2V8h2v2h2v2h-2v2h-2v-2z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title">Jenjang Ula</h2>
+                <p class="card-subtitle">Madrasah Ibtidaiyah</p>
+                <p class="card-description">
+                    Untuk calon santri tingkat dasar (setara SD/MI). Silakan klik tombol di bawah untuk melanjutkan proses pendaftaran.
+                </p>
+                <a href="https://script.google.com/macros/s/AKfycbwM2H9c2_MAMUEk6toSXvLV023xUdh5ZPZs8-ijRI6txoLLSSl3mTtOixqp8e0ELD3Kww/exec" class="btn-primary">
+                    Daftar Jenjang Ula
+                </a>
+            </div>
+
+            <!-- Card Wustha -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title">Jenjang Wustha</h2>
+                <p class="card-subtitle">Madrasah Tsanawiyah</p>
+                <p class="card-description">
+                    Untuk calon santri tingkat menengah pertama (setara SMP/MTs). Silakan klik tombol di bawah untuk melanjutkan proses pendaftaran.
+                </p>
+                <a href="https://script.google.com/macros/s/AKfycbwRjody58dJjdmAIrVhaq0ysF_6PhnYESGS4IY-lyEX6a2_d55Yg8M1qmWgFagy6YGU/exec" class="btn-primary">
+                    Daftar Jenjang Wustha
+                </a>
+            </div>
+
+            <!-- Card Ulya -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title">Jenjang Ulya</h2>
+                <p class="card-subtitle">Madrasah Aliyah</p>
+                <p class="card-description">
+                    Untuk calon santri tingkat menengah atas (setara SMA/MA). Silakan klik tombol di bawah untuk melanjutkan proses pendaftaran.
+                </p>
+                <a href="https://script.google.com/macros/s/AKfycbxafC3h9tcOXFXUnP8BjgM_wck5Gk1AoSbIHXwwBNWIY9G6g_IryCNtbenkHT33cI4_/exec" class="btn-primary">
+                    Daftar Jenjang Ulya
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Pondok Pesantren Dzunnuroin</strong></p>
+            <p>Penerimaan Santri Baru Tahun Ajaran 2026/2027</p>
+            <div class="contact-info">
+                <p>Untuk informasi lebih lanjut, silakan hubungi panitia PSB</p>
+                <p>Email: <a href="mailto:psb@dzunnuroin.ac.id">psb@dzunnuroin.ac.id</a></p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
